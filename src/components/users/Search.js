@@ -10,13 +10,18 @@ class Search extends Component {
     static propsTypes = {
         searchUsers: PropTypes.func.isRequired,
         clearUsers: PropTypes.func.isRequired,
-        showClearBtn: PropTypes.bool.isRequired
+        showClearBtn: PropTypes.bool.isRequired,
+        handleSearchAlert: PropTypes.func.isRequired
     }
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.searchUsers(this.state.text);
-        this.setState({ text: '' });
+        if (this.state.text === '') {
+            this.props.handleSearchAlert('Please Enter a Name', 'light');
+        } else {
+            this.props.searchUsers(this.state.text);
+            this.setState({ text: '' });
+        }
     }
 
     handleChange = e => this.setState({ [e.target.name]: e.target.value });
