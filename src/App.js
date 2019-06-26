@@ -15,18 +15,10 @@ class App extends Component {
   state = {
     users: [],
     user: {},
+    repos: [],
     loading: false,
     alert: null
   }
-
-  // async componentDidMount() {
-  //   this.setState({ loading: true });
-  //   const res = await axios.get(`https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
-  //   this.setState({
-  //     users: res.data,
-  //     loading: false
-  //   });
-  // }
 
   //Search GitHub Users
   searchUsers = async text => {
@@ -39,12 +31,21 @@ class App extends Component {
   }
 
   //Get Single GitHub User
-  getUser = async (username) => {
+  getUser = async username => {
     this.setState({loading: true});
     const res = await axios.get(`https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
-    console.log(res)
     this.setState({
       user: res.data,
+      loading: false
+    });
+  }
+
+  //Get User Repos
+  getUserRepos = async username => {
+    this.setState({loading: true});
+    const res = await axios.get(`https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+    this.setState({
+      repos: res.data,
       loading: false
     });
   }
@@ -58,7 +59,7 @@ class App extends Component {
   clearUsers = () => this.setState({ users: [], loading: false });
 
   render() {
-    let { users, user, loading } = this.state;
+    let { users, user, repos, loading } = this.state;
     return (
       <Router>
         <div className="App">
@@ -79,7 +80,14 @@ class App extends Component {
               )} />
               <Route exact path="/about" component={About} />
               <Route exact path="/user/:login" render={props => (
-                <User {...props } getUser={this.getUser} user={user} loading={loading} />
+                <User 
+                  {...props } 
+                  getUser={this.getUser} 
+                  getUserRepos={this.getUserRepos} 
+                  user={user} 
+                  repos={repos}
+                  loading={loading} 
+                />
               )} />
             </Switch>
           </div>
