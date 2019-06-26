@@ -92,13 +92,13 @@ class User extends Component {
                     <div className="badge badge-primary">
                         Followers: {followers}
                     </div>
-                    <div className="badge badge-success">
+                    <div className="badge badge-primary">
                         Following: {following}
                     </div>
-                    <div className="badge badge-danger">
+                    <div className="badge badge-success">
                         Public Repos: {public_repos}
                     </div>
-                    <div className="badge badge-primary">
+                    <div className="badge badge-info">
                         Public Gists: {public_gists}
                     </div>
                 </div>
