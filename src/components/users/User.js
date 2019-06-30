@@ -34,7 +34,9 @@ const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
         <Fragment>
             <Link to='/' className="btn btn-light">Back To Search</Link>
             Hireable: {' '}
-            {hireable ? <i className="fas fa-check text-success" /> : <i className="fas fa-times-circle text-danger" />}
+            {hireable ? <i 
+                className="fas fa-check text-success" /> : 
+                <i className="fas fa-times-circle text-danger" />}
             <div className="card grid-2">
                 <div className="all-center">
                     <img
