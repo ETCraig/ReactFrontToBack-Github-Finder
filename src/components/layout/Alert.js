@@ -9,7 +9,7 @@ const Alert = () => {
     const alert = alertContext;
 
     return (
-        alert !== null && (
+        alert == null && (
             <div className={`alert alert-${alert.type}`}>
                 <i className="fas fa-info-circle" /> {alert.msg}
             </div>

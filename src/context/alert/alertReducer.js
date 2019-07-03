@@ -3,9 +3,13 @@ import { SET_ALERT, REMOVE_ALERT } from '../Types';
 export default (state, action) => {
     switch (action.type) {
         case SET_ALERT:
-            return action.payload;
+            return {
+                alert: action.payload
+            };
         case REMOVE_ALERT:
-            return null;
+            return {
+                alter: null
+            };
         default:
             return state
     }

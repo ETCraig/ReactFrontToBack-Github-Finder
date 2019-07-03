@@ -6,13 +6,15 @@ import {
 } from '../Types';
 
 const AlertState = props => {
-    const initialState = null;
+    const initialState = {
+        alert: null
+    };
     const [state, dispatch] = useReducer(AlertReducer, initialState);
 
     //Changes Alert 
     const handleSearchAlert = (msg, type) => {
         dispatch({
-            TYPE: SET_ALERT,
+            type: SET_ALERT,
             payload: { msg, type }
         });
         setTimeout(() => dispatch({ type: REMOVE_ALERT }), 5000);
@@ -20,7 +22,7 @@ const AlertState = props => {
 
     return <AlertContext.Provider
         value={{
-            alert: state,
+            alert: state.alert,
             handleSearchAlert,
         }}
     >
