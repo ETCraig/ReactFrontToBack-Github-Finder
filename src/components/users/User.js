@@ -1,17 +1,22 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useContext, useEffect } from 'react'
 
+import gitHubContext from '../../context/github/gitHubContext';
 import Repos from '../repos/Repos';
 import Spinner from '../layout/Spinner';
 
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
-const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
+const User = ({ match }) => {
+    const githubContext = useContext(gitHubContext);
+
+    const { getUser, loading, user, repos, getUserRepos } = githubContext;
+
     useEffect(() => {
         getUser(match.params.login);
         getUserRepos(match.params.login);
         //eslint-disable-next-line
     }, []);
+
 
     const {
         name,
@@ -34,8 +39,8 @@ const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
         <Fragment>
             <Link to='/' className="btn btn-light">Back To Search</Link>
             Hireable: {' '}
-            {hireable ? <i 
-                className="fas fa-check text-success" /> : 
+            {hireable ? <i
+                className="fas fa-check text-success" /> :
                 <i className="fas fa-times-circle text-danger" />}
             <div className="card grid-2">
                 <div className="all-center">
@@ -98,14 +103,6 @@ const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
             <Repos repos={repos} />
         </Fragment>
     );
-}
-
-User.propTypes = {
-    loading: PropTypes.bool,
-    user: PropTypes.object.isRequired,
-    repos: PropTypes.array.isRequired,
-    getUser: PropTypes.func.isRequired,
-    getUserRepos: PropTypes.func.isRequired
 }
 
 export default User
