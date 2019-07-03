@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react'
 
-import gitHubContext from '../../context/github/gitHubContext';
+import GitHubContext from '../../context/github/gitHubContext';
 import AlertContext from '../../context/alert/alertContext';
 
 const Search = () => {
-    const githubContext = useContext(gitHubContext);
+    const githubContext = useContext(GitHubContext);
     const alertContext = useContext(AlertContext);
     const [text, setText] = useState('');
 
