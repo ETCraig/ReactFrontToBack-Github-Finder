@@ -12,7 +12,7 @@ const Search = () => {
     const handleSubmit = e => {
         e.preventDefault();
         if (text === '') {
-            alertContext.handleSearchAlert('Please Enter a Name', 'light');
+            alertContext.setAlert('Please Enter a Name', 'light');
         } else {
             githubContext.searchUsers(text);
             setText('');

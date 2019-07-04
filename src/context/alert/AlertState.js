@@ -12,7 +12,7 @@ const AlertState = props => {
     const [state, dispatch] = useReducer(AlertReducer, initialState);
 
     //Changes Alert 
-    const handleSearchAlert = (msg, type) => {
+    const setAlert = (msg, type) => {
         dispatch({
             type: SET_ALERT,
             payload: { msg, type }
@@ -23,7 +23,7 @@ const AlertState = props => {
     return <AlertContext.Provider
         value={{
             alert: state.alert,
-            handleSearchAlert,
+            setAlert,
         }}
     >
         {props.children}
